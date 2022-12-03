@@ -5,4 +5,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "aoc"
+
 [dependencies]
+anyhow = "1.0.66"
+
+[[bin]]
+name = "day01"
+path = "src/day01.rs"
