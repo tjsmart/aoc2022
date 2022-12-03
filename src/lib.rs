@@ -14,6 +14,22 @@ where
         .collect())
 }
 
+pub fn collect_blocks<T>(fname: &str) -> Result<Vec<Vec<T>>>
+where
+    T: FromStr,
+    <T as FromStr>::Err: Debug,
+{
+    Ok(std::fs::read_to_string(&fname)?
+        .split("\n\n")
+        .map(|block| {
+            block
+                .lines()
+                .map(|line| line.parse::<T>().expect("Failed to parse line."))
+                .collect()
+        })
+        .collect())
+}
+
 pub fn time_it<F, R>(func: F) -> Result<()>
 where
     F: FnOnce() -> Result<R>,

@@ -1,28 +1,21 @@
 use anyhow::Result;
-use aoc::collect_lines;
+use aoc::collect_blocks;
 use aoc::time_it;
+use itertools::sorted;
 
 fn main() -> Result<()> {
-    time_it(|| solution())?;
+    time_it(|| solution(1))?;
+    time_it(|| solution(3))?;
     Ok(())
 }
 
-fn solution() -> Result<u32> {
-    let data = collect_lines::<String>("realdeal.txt")?;
+fn solution(take: usize) -> Result<u32> {
+    let blocks = collect_blocks::<u32>("realdeal.txt")?;
 
-    let mut max = 0u32;
-    let mut sum = 0u32;
+    let block_sums = blocks
+        .into_iter()
+        .map(|block| block.into_iter().sum())
+        .collect::<Vec<u32>>();
 
-    for x in data {
-        if x.is_empty() {
-            if sum > max {
-                max = sum;
-            }
-            sum = 0;
-        } else {
-            sum = sum + x.parse::<u32>()?;
-        }
-    }
-
-    Ok(max)
+    Ok(sorted(block_sums).rev().take(take).sum())
 }

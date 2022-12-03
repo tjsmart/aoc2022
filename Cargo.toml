@@ -10,6 +10,7 @@ name = "aoc"
 
 [dependencies]
 anyhow = "1.0.66"
+itertools = "0.10.5"
 
 [[bin]]
 name = "day01"
