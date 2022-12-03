@@ -15,7 +15,7 @@ fn main() -> Result<()> {
 }
 
 fn solution() -> Result<u32> {
-    let sacks = collect_lines::<RuckSack>("input/day03_realdeal.txt")?;
+    let sacks = collect_lines::<RuckSack>("input/day03.txt")?;
     Ok(sacks
         .into_iter()
         .enumerate()
@@ -94,13 +94,8 @@ mod tests {
         assert_eq!(chr_to_priority('Z'), 52);
     }
 
-    // #[test]
-    // fn sln1() {
-    //     assert_eq!(solution().unwrap(), 9241);
-    // }
-
-    // #[test]
-    // fn sln2() {
-    //     assert_eq!(solution(3).unwrap(), 212117);
-    // }
+    #[test]
+    fn sln() {
+        assert_eq!(solution().unwrap(), 8233);
+    }
 }

@@ -4,13 +4,12 @@ use aoc::time_it;
 use itertools::sorted;
 
 fn main() -> Result<()> {
-    time_it(|| solution(1))?;
     time_it(|| solution(3))?;
     Ok(())
 }
 
 fn solution(take: usize) -> Result<u32> {
-    let blocks = collect_blocks::<u32>("input/day01_realdeal.txt")?;
+    let blocks = collect_blocks::<u32>("input/day01.txt")?;
 
     let block_sums = blocks
         .into_iter()

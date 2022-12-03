@@ -14,7 +14,7 @@ fn main() -> Result<()> {
 }
 
 fn solution() -> Result<u32> {
-    let games = collect_lines::<Game>("input/day02_realdeal.txt")?;
+    let games = collect_lines::<Game>("input/day02.txt")?;
 
     Ok(games.into_iter().map(|game| game.score()).sum())
 }
@@ -134,26 +134,6 @@ impl FromStr for Game {
 mod tests {
     use super::*;
 
-    // #[test]
-    // fn cmp() {
-    //     assert_eq!(Game::from_str("A X").unwrap().score(), 3 + 1); // rock rock
-    //     assert_eq!(Game::from_str("A Y").unwrap().score(), 6 + 2); // rock paper
-    //     assert_eq!(Game::from_str("A Z").unwrap().score(), 0 + 3); // rock scissors
-    //
-    //     assert_eq!(Game::from_str("B X").unwrap().score(), 0 + 1);
-    //     assert_eq!(Game::from_str("B Y").unwrap().score(), 3 + 2);
-    //     assert_eq!(Game::from_str("B Z").unwrap().score(), 6 + 3);
-    //
-    //     assert_eq!(Game::from_str("C X").unwrap().score(), 6 + 1);
-    //     assert_eq!(Game::from_str("C Y").unwrap().score(), 0 + 2);
-    //     assert_eq!(Game::from_str("C Z").unwrap().score(), 3 + 3);
-    // }
-
-    // #[test]
-    // fn sln1() {
-    //     assert_eq!(solution().unwrap(), 9241);
-    // }
-
     #[test]
     fn cmp() {
         assert_eq!(Game::from_str("A X").unwrap().score(), 0 + 3); // rock lost
@@ -169,8 +149,8 @@ mod tests {
         assert_eq!(Game::from_str("C Z").unwrap().score(), 6 + 1);
     }
 
-    // #[test]
-    // fn sln2() {
-    //     assert_eq!(solution(3).unwrap(), 212117);
-    // }
+    #[test]
+    fn sln2() {
+        assert_eq!(solution().unwrap(), 14610);
+    }
 }

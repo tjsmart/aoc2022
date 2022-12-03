@@ -14,7 +14,7 @@ fn main() -> Result<()> {
 }
 
 fn solution() -> Result<u32> {
-    let sacks = collect_lines::<RuckSack>("input/day03_realdeal.txt")?;
+    let sacks = collect_lines::<RuckSack>("input/day03.txt")?;
     Ok(sacks
         .chunks(3)
         .map(|sacks| chr_to_priority(get_common(&sacks[0], &sacks[1], &sacks[2]).expect("what?")))
@@ -69,13 +69,8 @@ mod tests {
         assert_eq!(chr_to_priority('Z'), 52);
     }
 
-    // #[test]
-    // fn sln1() {
-    //     assert_eq!(solution().unwrap(), 9241);
-    // }
-
-    // #[test]
-    // fn sln2() {
-    //     assert_eq!(solution(3).unwrap(), 212117);
-    // }
+    #[test]
+    fn sln() {
+        assert_eq!(solution().unwrap(), 2821);
+    }
 }
