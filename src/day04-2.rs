@@ -29,8 +29,7 @@ trait Overlap {
 
 impl Overlap for Pair {
     fn overlap(&self) -> bool {
-        ((self.r1.start <= self.r2.start) && (self.r1.end >= self.r2.end))
-            || ((self.r2.start <= self.r1.start) && (self.r2.end >= self.r1.end))
+        self.r1.clone().any(|x| self.r2.contains(&x))
     }
 }
 
@@ -64,14 +63,14 @@ mod tests {
     fn overlap() {
         assert_eq!(Pair::from_str("2-4,6-8").unwrap().overlap(), false);
         assert_eq!(Pair::from_str("2-3,4-5").unwrap().overlap(), false);
-        assert_eq!(Pair::from_str("5-7,7-9").unwrap().overlap(), false);
+        assert_eq!(Pair::from_str("5-7,7-9").unwrap().overlap(), true);
         assert_eq!(Pair::from_str("2-8,3-7").unwrap().overlap(), true);
         assert_eq!(Pair::from_str("6-6,4-6").unwrap().overlap(), true);
-        assert_eq!(Pair::from_str("2-6,4-8").unwrap().overlap(), false);
+        assert_eq!(Pair::from_str("2-6,4-8").unwrap().overlap(), true);
     }
 
     #[test]
     fn sln() {
-        assert_eq!(solution().unwrap(), 588);
+        assert_eq!(solution().unwrap(), 911);
     }
 }
