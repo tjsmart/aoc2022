@@ -16,7 +16,7 @@ fn solution() -> Result<usize> {
 }
 
 type Window<'a> = HashSet<&'a char>;
-const WINDOW_SIZE: usize = 4;
+const WINDOW_SIZE: usize = 14;
 
 fn find_marker(s: &str) -> usize {
     s.chars()
@@ -40,17 +40,17 @@ mod tests {
     use rstest::rstest;
 
     #[rstest]
-    #[case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7)]
-    #[case("bvwbjplbgvbhsrlpgdmjqwftvncz", 5)]
-    #[case("nppdvjthqldpwncqszvftbrmjlhg", 6)]
-    #[case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10)]
-    #[case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11)]
+    #[case("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19)]
+    #[case("bvwbjplbgvbhsrlpgdmjqwftvncz", 23)]
+    #[case("nppdvjthqldpwncqszvftbrmjlhg", 23)]
+    #[case("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29)]
+    #[case("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26)]
     fn find_marker_tests(#[case] input: &str, #[case] expected: usize) {
         assert_eq!(expected, find_marker(input))
     }
 
     #[test]
     fn sln() {
-        assert_eq!(solution().unwrap(), 1929);
+        assert_eq!(solution().unwrap(), 3298);
     }
 }
