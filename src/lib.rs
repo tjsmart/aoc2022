@@ -30,6 +30,14 @@ where
         .collect())
 }
 
+pub fn read_and_parse<T>(fname: &str) -> Result<T>
+where
+    T: FromStr<Err = anyhow::Error>,
+    <T as FromStr>::Err: Debug,
+{
+    std::fs::read_to_string(&fname)?.parse()
+}
+
 pub fn time_it<F, R>(func: F) -> Result<()>
 where
     F: FnOnce() -> Result<R>,
