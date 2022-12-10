@@ -1,5 +1,8 @@
 use std::collections::HashSet;
 use std::str::FromStr;
+// use std::thread;
+// use std::time;
+// use std::vec;
 
 use anyhow::anyhow;
 use anyhow::Error;
@@ -19,16 +22,34 @@ fn solution() -> Result<usize> {
     let motions = collect_lines::<Motion>("input/day09.txt")?;
     let mut rope = Rope::default();
     let mut tail_coords: HashSet<Coord> = HashSet::new();
+    // let ten_millis = time::Duration::from_millis(20);
 
     for motion in motions {
         for _ in 0..motion.count {
             rope.wiggle(&motion.dir);
             tail_coords.insert(rope.tail());
         }
+        // _draw(&rope);
+        // thread::sleep(ten_millis);
     }
 
     Ok(tail_coords.len())
 }
+
+// fn _draw(rope: &Rope) {
+//     print!("{esc}c", esc = 27 as char);
+//     let mut screen = vec![vec![".".to_string(); 100]; 120];
+//
+//     for (i, knot) in rope.knots.iter().enumerate() {
+//         let y = (knot.0 + 80) as usize;
+//         let x = (knot.1 + 80) as usize;
+//         screen[y][x] = i.to_string();
+//     }
+//
+//     for col in 0..120 {
+//         println!("{}", screen[col].join(" "));
+//     }
+// }
 
 #[derive(Default)]
 struct Rope {
