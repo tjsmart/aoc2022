@@ -30,6 +30,17 @@ where
         .collect())
 }
 
+pub fn collect_statements<T>(fname: &str) -> Result<Vec<T>>
+where
+    T: FromStr,
+    <T as FromStr>::Err: Debug,
+{
+    Ok(std::fs::read_to_string(&fname)?
+        .split("\n\n")
+        .map(|block| block.parse().expect("Failed to parse statement."))
+        .collect())
+}
+
 pub fn read_and_parse<T>(fname: &str) -> Result<T>
 where
     T: FromStr<Err = anyhow::Error>,
