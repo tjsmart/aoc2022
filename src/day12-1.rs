@@ -1,5 +1,9 @@
 use std::collections::HashSet;
+use std::fmt::Display;
 use std::str::FromStr;
+// use std::thread;
+// use std::time;
+// use std::time::Duration;
 
 use anyhow::anyhow;
 use anyhow::Error;
@@ -7,6 +11,9 @@ use anyhow::Result;
 
 use aoc::read_and_parse;
 use aoc::time_it;
+use itertools::Itertools;
+
+// const SLEEP: Duration = time::Duration::from_millis(30);
 
 fn main() -> Result<()> {
     time_it(|| solution())?;
@@ -55,11 +62,43 @@ impl Iterator for Visitor {
     type Item = ();
 
     fn next(&mut self) -> Option<()> {
+        // print!("{esc}c", esc = 27 as char);
+        // println!("{self}");
+        // thread::sleep(SLEEP);
         if self.current.contains(&self.grid.end) {
             None
         } else {
             self.walk();
             Some(())
+        }
+    }
+}
+
+impl Display for Visitor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let (nrows, ncols) = self.grid.shape();
+
+        for row in 0..nrows {
+            let line = (0..ncols).map(|col| _to_char(self, row, col)).join("");
+            writeln!(f, "{}", line)?;
+        }
+        Ok(())
+    }
+}
+
+fn _to_char(visitor: &Visitor, row: usize, col: usize) -> char {
+    let start = visitor.grid.start;
+    let end = visitor.grid.end;
+
+    if (row, col) == start {
+        'S'
+    } else if (row, col) == end {
+        'E'
+    } else {
+        if visitor.prev.contains(&(row, col)) {
+            '.'
+        } else {
+            'x'
         }
     }
 }
