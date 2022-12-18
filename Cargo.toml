@@ -11,6 +11,8 @@ name = "aoc"
 [dependencies]
 anyhow = "1.0.66"
 itertools = "0.10.5"
+lazy_static = "1.4.0"
+regex = "1.7.0"
 
 [dev-dependencies]
 rstest = "0.16.0"
@@ -126,3 +128,7 @@ path = "src/day14-1.rs"
 [[bin]]
 name = "day14-2"
 path = "src/day14-2.rs"
+
+[[bin]]
+name = "day15-1"
+path = "src/day15-1.rs"
