@@ -157,3 +157,15 @@ impl MulAssign for Point {
         self.y *= rhs.y;
     }
 }
+
+pub trait Divmod {
+    fn divmod(&self, dividend: usize) -> (usize, usize);
+}
+
+impl Divmod for usize {
+    fn divmod(&self, dividend: usize) -> (usize, usize) {
+        let q = self / dividend;
+        let r = self - (q * dividend);
+        (q, r)
+    }
+}
