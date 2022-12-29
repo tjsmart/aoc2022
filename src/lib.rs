@@ -1,6 +1,6 @@
 use anyhow::Result;
 use std::fmt::Debug;
-use std::ops::{Add, Div, Mul, Sub};
+use std::ops::{Add, AddAssign, Div, Mul, MulAssign, Sub, SubAssign};
 use std::str::FromStr;
 use std::time;
 
@@ -83,6 +83,7 @@ impl Into<(i32, i32)> for Point {
 }
 
 impl Point {
+    /// Returns a Point at (0, 0)
     pub fn default() -> Self {
         Self::new(0, 0)
     }
@@ -133,5 +134,26 @@ impl Div for Point {
             x: self.x / other.x,
             y: self.y / other.y,
         }
+    }
+}
+
+impl AddAssign for Point {
+    fn add_assign(&mut self, rhs: Self) {
+        self.x += rhs.x;
+        self.y += rhs.y;
+    }
+}
+
+impl SubAssign for Point {
+    fn sub_assign(&mut self, rhs: Self) {
+        self.x -= rhs.x;
+        self.y -= rhs.y;
+    }
+}
+
+impl MulAssign for Point {
+    fn mul_assign(&mut self, rhs: Self) {
+        self.x *= rhs.x;
+        self.y *= rhs.y;
     }
 }
